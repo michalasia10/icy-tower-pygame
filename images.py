@@ -1,16 +1,21 @@
 import os
-from dataclasses import dataclass, asdict
+from typing import Optional
 
 from pygame.image import load as load_image
 from pygame.surface import Surface
-import inspect
+from pygame.transform import scale as scale_image
+
+from settings import SCREEN
 
 
 class Image:
-    IMAGE_PATH = ''
+    IMAGE_PATH: str = ''
+    SCALE: Optional[tuple] = None
 
     def __init__(self):
-        self.image: Surface = load_image(os.path.join('assets', self.IMAGE_PATH)).convert()
+        self.image: Surface = load_image(os.path.join('assets', self.IMAGE_PATH)).convert_alpha()
+        if self.SCALE and isinstance(self.SCALE, tuple):
+            self.image = scale_image(self.image, self.SCALE)
 
 
 class WallImage(Image):
@@ -27,6 +32,7 @@ class PlatformImage(Image):
 
 class BackGroundImage(Image):
     IMAGE_PATH = 'background.jpg'
+    SCALE = SCREEN
 
 
 class ImagesStore:
@@ -37,7 +43,7 @@ class ImagesStore:
         self.background_image = BackGroundImage
 
     def load(self):
-        images = [(atrr, getattr(self, atrr)) for atrr in dir(self) if
-                  'image' in atrr and issubclass(getattr(self, atrr), Image)]
+        images = [(atrr, getattr(self, atrr)) for atrr in dir(self)
+                  if 'image' in atrr and issubclass(getattr(self, atrr), Image)]
         for atrr, image in images:
             setattr(self, atrr, image())
