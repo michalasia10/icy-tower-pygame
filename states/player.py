@@ -7,6 +7,7 @@ from pygame import (
     K_SPACE
 )
 from settings import IMAGE_PLAYER_WIDTH, SCREEN_WIDTH, WALL_WIDTH, IMAGE_PLAYER_HEIGHT, SCREEN_HEIGHT
+from sprites import player
 from sprites.player import IcyTowerSprite
 from states.base import State
 
@@ -28,9 +29,9 @@ class PlayerState(State):
     def handle_event(self, event):
         if event.type == KEYDOWN:
             if event.key == K_LEFT:
-                print('LEFT')
+                self.sprite.rect.move_ip(-10, 0)
             if event.key == K_RIGHT:
-                print('RIGHT')
+                self.sprite.rect.move_ip(10, 0)
             if event.key == K_SPACE:
                 print('JUMP')
 
