@@ -1,5 +1,11 @@
 from random import randint
 
+from pygame import (
+    KEYDOWN,
+    K_LEFT,
+    K_RIGHT,
+    K_SPACE
+)
 from settings import IMAGE_PLAYER_WIDTH, SCREEN_WIDTH, WALL_WIDTH, IMAGE_PLAYER_HEIGHT, SCREEN_HEIGHT
 from sprites.player import IcyTowerSprite
 from states.base import State
@@ -20,10 +26,16 @@ class PlayerState(State):
         )
 
     def handle_event(self, event):
-        ...
+        if event.type == KEYDOWN:
+            if event.key == K_LEFT:
+                print('LEFT')
+            if event.key == K_RIGHT:
+                print('RIGHT')
+            if event.key == K_SPACE:
+                print('JUMP')
 
     def update(self):
-        print("PLAYER UPDATE?")
+        0 #do nothing
 
     def render(self):
         self.sprite.draw()
