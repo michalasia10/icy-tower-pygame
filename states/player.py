@@ -25,7 +25,7 @@ class MovementState:
     max_velocity: int = 3
 
     def reset_direction(self):
-        self.direction = DirectionEnum.NONE.NONE
+        self.direction = DirectionEnum.NONE
 
     def reset_velocity(self):
         self.velocity = 0
