@@ -6,6 +6,7 @@ from pygame import (
     display,
     QUIT
 )
+from pygame.event import Event
 from pygame.time import Clock
 
 from images import ImagesStore
@@ -36,6 +37,7 @@ class IcyTowerGame:
 
     def run(self):
         while True:
+            event: Event
             for event in pygame_event.get():
                 if event.type == QUIT: sys.exit()
 
