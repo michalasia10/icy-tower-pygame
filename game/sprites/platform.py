@@ -50,7 +50,10 @@ class PlatformSprite(BaseIcyTowerSprite):
         platforms: list[PlatformSprite] = []
 
         platform: PlatformSprite
-        prev_platform_bottom = min(platform.rect.y for platform in platform_sprites if platform.game_level == level)
+        prev_platform_bottom = (
+                min(platform.rect.y for platform in platform_sprites if platform.game_level == level)
+                - IMAGE_PLAYER_HEIGHT * 1/4
+        )
 
         for i in range(10):
             def generate_platform() -> tuple[PlatformSprite, int]:
@@ -59,7 +62,7 @@ class PlatformSprite(BaseIcyTowerSprite):
                 """
                 min_gap = IMAGE_PLAYER_HEIGHT + MAX_Y_PLAYER_VELOCITY
                 h = prev_platform_bottom - randint(MAX_Y_PLAYER_VELOCITY - 10, min_gap)
-                return PlatformSprite(
+                return cls(
                     screen=screen,
                     image=platform_image,
                     x=randint(min(wall.rect.x for wall in walls), max(wall.rect.x for wall in walls) - i * 10),
