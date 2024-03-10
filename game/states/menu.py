@@ -1,9 +1,9 @@
 import sys
 
-from buttons import Button
-from screen import GameScreen
-from states.base import State
-from states.game import GameState
+from game.buttons import Button
+from game.screen import GameScreen
+from game.states.base import State
+from game.states.game import GameState
 
 
 class MenuState(State):

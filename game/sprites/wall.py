@@ -3,8 +3,8 @@ from enum import Enum
 from pygame import Rect
 from pygame.transform import flip, scale
 
-from settings import SCREEN_HEIGHT, WALL_WIDTH
-from sprites.base import BaseIcyTowerSprite
+from game.settings import SCREEN_HEIGHT, WALL_WIDTH
+from game.sprites.base import BaseIcyTowerSprite
 
 
 class WallSideEnum(str, Enum):
@@ -17,12 +17,12 @@ class WallImageTransformer:
         self.image = image
         self.side = side
 
-    def _transform_left(self):
-        scale_r, flip_r = self._transform_right()
+    def _transform_right(self):
+        scale_r, flip_r = self._transform_left()
         scale_l = flip(scale_r, True, True)
         return scale_l, flip(scale_l, False, True)
 
-    def _transform_right(self):
+    def _transform_left(self):
         return scale(self.image, (WALL_WIDTH, SCREEN_HEIGHT)), flip(self.image, False, True)
 
     def transform(self):
