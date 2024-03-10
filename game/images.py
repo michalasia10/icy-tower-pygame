@@ -1,9 +1,9 @@
 import os
-from typing import Optional
 
 from pygame.image import load as load_image
 from pygame.surface import Surface
 from pygame.transform import scale as scale_image
+from typing import Optional
 
 from settings import SCREEN
 
